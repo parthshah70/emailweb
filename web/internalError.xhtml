@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <head>
+        <title>Internal Error</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="css/bootstrap-theme.css" rel="stylesheet" type="text/css"/>
+        <link rel="icon" type="image/png" href="img/logo.png" />
+        <link href="css/simple-sidebar.css" rel="stylesheet"/>
+    </head>
+    <body style=" background-image: url(img/volcano.jpg) ; background-size: cover">
+        <h:form>
+            
+             <div id="wrapper">
+            <div id="sidebar-wrapper">
+                <ul class="sidebar-nav">
+                    <li class="sidebar-brand">
+                        <a href="index.xhtml">
+                            UHCL Email System
+                        </a>
+                        
+                        
+                    </li>
+                    <li>
+                        <a href="register.xhtml">Registration</a>
+                    </li>
+                    <li>
+                        <a href="login.xhtml">Login</a>
+                    </li>
+                </ul>
+            </div>
+            <div id="page-content-wrapper">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="alert alert-info">
+  <strong>Internal Error! Please Try Again later!</strong>
+</div>
+                            <a href="" class="btn btn-info btn-md" id="menu-toggle">Close the side menu</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="js/jquery.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script>
+            $("#menu-toggle").click(function (e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("toggled");
+            });
+        </script>
+           
+        </h:form>
+    </body>
+</html>
+
+
+ 

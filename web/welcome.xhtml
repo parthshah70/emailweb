@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Welcome to your Inbox</title>
+        <meta http-equiv="pragma" content="no-cache" />
+        <link href="css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="css/bootstrap-theme.css" rel="stylesheet" type="text/css"/>
+        <link rel="icon" type="image/png" href="img/logo.png" />
+        <link href="css/simple-sidebar.css" rel="stylesheet"/>
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet"/>
+    </h:head>
+    <h:body style="background-image: url(img/Stockholm.jpg) ; background-size: cover">
+        <h:form>
+            <div id="wrapper">
+                <div id="sidebar-wrapper">
+                    <ul class="sidebar-nav">
+                        <li class="sidebar-brand">
+                            <a href="#">
+                                UHCL Email System
+                            </a>
+                        </li>
+                        <li>
+                            <a href="createemail.xhtml">Compose email</a>
+                        </li>
+                        <li>
+                            <a href="welcome.xhtml">Inbox#{testBean.inboxemailssize()}</a>
+                        </li>
+                        <li>
+                            <a href="sentmails.xhtml">Sent Items</a>
+                        </li>
+                        <li>
+
+                            <h:commandLink id="signout" value="Sign Out" action="#{login.theLoginAccount.signOut()}"/>
+                        </li>
+                    </ul>
+                </div>
+                <div id="page-content-wrapper">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="alert alert-info">
+                                    <strong>Welcome, #{login.id}</strong>
+                                </div>
+                                <div class="panel panel-info">
+                                    <div class="panel-body">
+                                        <h:panelGroup id="inboxTable">
+                                        <table class="table  table-hover"  >
+                                            <thead>
+                                                <tr class="info">
+                                                    <th >From</th>
+                                                    <th>Subject</th>
+                                                    <th>Time</th>
+                                                    <th></th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <ui:repeat value="#{testBean.inboxemails()}" var="i">
+                                                    <tr>
+                                                        <td>#{i.fromid}</td>
+                                                        <td> <h:commandLink action="#{login.theLoginAccount.viewEmail(i)}">#{i.subject} </h:commandLink>  </td>
+                                                        <td>#{i.timestamp}</td>
+                                                       
+                                                       
+                                                       
+                                                           <td> <strong>#{i.reademail}</strong> </td>
+                                                           <td>
+                                                               <h:commandLink type="button" styleClass="btn  btn-sm btn-default" action="welcome.xhtml" actionListener="#{testBean.deleteemail(i)}">
+                                                                   <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+ <!-- <f:ajax event="action" execute="@this" render=":inboxTable" listener="{testBean.deleteemail(i)}"> 
+                                                </f:ajax> -->
+                                                               </h:commandLink>
+                                                           </td>
+                                                           
+                                                    </tr>
+                                                </ui:repeat>
+                                            </tbody>
+                                        </table>
+                                          </h:panelGroup>
+                                    </div>
+
+                                </div>
+                                <a href="" class="btn btn-info btn-md" id="menu-toggle">Close the side menu</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script src="js/jquery.js"></script>
+            <script src="js/bootstrap.min.js"></script>
+            <script>
+                $("#menu-toggle").click(function (e) {
+                    e.preventDefault();
+                    $("#wrapper").toggleClass("toggled");
+                });
+            </script>     
+        </h:form>
+
+    </h:body>
+</html>

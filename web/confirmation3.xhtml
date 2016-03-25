@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <head>
+        <title>Email Sent</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="css/bootstrap-theme.css" rel="stylesheet" type="text/css"/>
+        <link rel="icon" type="image/png" href="img/logo.png" />
+        <link href="css/simple-sidebar.css" rel="stylesheet"/>
+    </head>
+    <body style=" background-image: url(img/Riga.jpg) ; background-size: cover" >
+        <h:form>
+         <div id="wrapper">
+            <div id="sidebar-wrapper">
+                <ul class="sidebar-nav">
+                    <li class="sidebar-brand">
+                        <a href="index.xhtml">
+                            UHCL Email System
+                        </a>
+                    </li>
+                     <li>
+                                <a href="welcome.xhtml">Inbox#{testBean.inboxemailssize()}</a>
+                            </li>
+                            <li>
+                                <a href="sentmails.xhtml">Sent Items</a>
+                            </li>
+                             <li>
+
+                            <h:commandLink id="signout" value="Sign Out" action="#{login.theLoginAccount.signOut()}"/>
+                            </li>
+                </ul>
+            </div>
+             <div id="page-content-wrapper">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="alert alert-info">
+                                <strong>Welcome, #{login.id}</strong>
+                            </div>
+                           <div class="panel panel-info">
+                                        <div class="panel-heading">Compose new email</div>
+                                        <div class="panel-body">                                    
+                                            <ul class="list-group" >
+                                                <h:form class="form-group">
+                                                    <ui:repeat value="#{testBean.replyEmail()}" var="i">
+                                                         <div class="form-group">
+                                              <li class="list-group-item"><strong>From: </strong>
+                                                  <h:inputText id="From" class="form-control"  p:placeholder="Receiver Email Id" value="#{i.fromid}"/>  
+                                              </li>
+                                                              </div>
+                                          <!-- <li class="list-group-item"><strong>From: </strong>{i.fromid} </li> -->
+                                         
+                                                <div class="form-group"> 
+                                                    <li class="list-group-item"><strong>To: </strong> 
+                                                        <h:inputText id="To" class="form-control"  p:placeholder="Receiver Email Id" value="#{i.toid}"/> 
+                                                </li>
+                                                </div>
+                                                <div class="form-group"> 
+                                                    <li class="list-group-item"><strong>Subject: </strong>
+                                                        <h:inputText id="Subject" class="form-control"  p:placeholder="Subject" value="#{i.subject}" /> 
+                                                </li>
+                                                </div> 
+                                                <div class="form-group"> 
+                                                    <li class="list-group-item"><strong>Body: </strong>
+                                                        <h:inputTextarea rows="5" id="body" class="form-control" p:placeholder="Body" value="#{i.body}" />
+                                                    </li>
+                                                </div>
+                                                    #{testBean.sendreplyemail(i)}
+                                                </ui:repeat>  
+                                            </h:form>
+                                            </ul>  
+                                        </div>
+                                    </div>
+                            
+                            <h:commandButton class="btn btn-info btn-md" id="send" value="Reply Email" action="confirmation4.xhtml"/>
+                            <a href="" class="btn btn-info btn-md" id="menu-toggle">Close the side menu</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="js/jquery.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script>
+            $("#menu-toggle").click(function (e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("toggled");
+            });
+        </script>
+            
+            
+            
+        </h:form>
+    </body>
+</html>
